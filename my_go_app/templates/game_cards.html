@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>บัตรเติมเกม - Paetermgame Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBg: '#1E1E2C',
+                        brandCard: '#252538',
+                        brandNav: '#161621',
+                        neonCyan: '#00FFC8',
+                    }
+                }
+            }
+        }
+
+        // ข้อมูลแพ็กเกจราคาของบัตรเติมเกมทั้ง 7 ประเภท อิงจากไฟล์ Dart
+        const cardPackages = {
+            'Razer Gold Pin': [
+                { name: 'Razer Gold Pin 50 บาท', price: 50 },
+                { name: 'Razer Gold Pin 100 บาท', price: 100 },
+                { name: 'Razer Gold Pin 300 บาท', price: 300 },
+                { name: 'Razer Gold Pin 500 บาท', price: 500 },
+                { name: 'Razer Gold Pin 1000 บาท', price: 1000 },
+                { name: 'Razer Gold Pin 3500 บาท', price: 3325 },
+                { name: 'Razer Gold Pin 5000 บาท', price: 4750 }
+            ],
+            'Garena Shell': [
+                { name: 'Garena Shell 10', price: 6 },
+                { name: 'Garena Shell 20', price: 12 },
+                { name: 'Garena Shell 50', price: 28 },
+                { name: 'Garena Shell 100', price: 55 },
+                { name: 'Garena Shell 200', price: 110 },
+                { name: 'Garena Shell 300', price: 165 },
+                { name: 'Garena Shell 500', price: 275 },
+                { name: 'Garena Shell 1000', price: 545 }
+            ],
+            'Steam Wallet': [
+                { name: 'Steam wallet 50 THB', price: 50 },
+                { name: 'Steam wallet 75 THB', price: 75 },
+                { name: 'Steam wallet 100 THB', price: 100 },
+                { name: 'Steam wallet 200 THB', price: 200 },
+                { name: 'Steam wallet 250 THB', price: 250 },
+                { name: 'Steam wallet 350 THB', price: 350 },
+                { name: 'Steam Wallet 750 THB', price: 750 },
+                { name: 'Steam wallet 1000 THB', price: 1000 },
+                { name: 'Steam Wallet 1500 THB', price: 1500 },
+                { name: 'Steam wallet 2000 THB', price: 2000 }
+            ],
+            'Roblox Card': [
+                { name: 'Roblox Card 96 THB', price: 96 },
+                { name: 'Roblox Card 125 THB', price: 125 },
+                { name: 'Roblox Card 192 THB', price: 190 },
+                { name: 'Roblox Card 300 THB', price: 297 },
+                { name: 'Roblox Card 576 THB', price: 560 },
+                { name: 'Roblox Card 750 THB', price: 742 },
+                { name: 'Roblox Card 960 THB', price: 930 }
+            ],
+            'PlayStation Network': [
+                { name: 'PSN Card 500 THB', price: 495 },
+                { name: 'PSN Card 1,000 THB', price: 990 },
+                { name: 'PSN Card 2,500 THB', price: 2475 }
+            ],
+            'Nintendo eShop': [
+                { name: 'Nintendo US 10$', price: 325 }, { name: 'Nintendo US 20$', price: 650 },
+                { name: 'Nintendo US 35$', price: 1120 }, { name: 'Nintendo US 50$', price: 1600 }
+            ],
+            'Xbox Gift Card': [
+                { name: 'Xbox Gift Card 5$(US)', price: 165 }, { name: 'Xbox Gift Card 10$ (US)', price: 325 },
+                { name: 'Xbox Gift Card 20$(US)', price: 650 }, { name: 'Xbox Gift Card 50$ (US)', price: 1600 }
+            ]
+        };
+
+        function selectCard(cardName) {
+            document.getElementById('selected_game').value = 'บัตร ' + cardName;
+            document.getElementById('display_card_name').innerText = 'บัตร ' + cardName;
+
+            const packageContainer = document.getElementById('package_container');
+            packageContainer.innerHTML = '';
+
+            const pkgs = cardPackages[cardName] || [];
+            pkgs.forEach(pkg => {
+                const btn = document.createElement('div');
+                btn.className = "cursor-pointer bg-brandNav border border-slate-700 hover:border-amber-400 p-3.5 rounded-xl flex flex-col justify-between transition group";
+                btn.onclick = () => {
+                    document.querySelectorAll('#package_container > div').forEach(el => el.classList.remove('border-amber-400', 'bg-slate-800'));
+                    btn.classList.add('border-amber-400', 'bg-slate-800');
+                    document.getElementById('amount_input').value = pkg.price;
+                    document.getElementById('display_price').innerText = '฿' + pkg.price;
+                };
+                btn.innerHTML = `
+                    <span class="text-xs font-semibold text-gray-300 group-hover:text-amber-400">${pkg.name}</span>
+                    <span class="text-sm font-bold text-amber-400 mt-2">฿${pkg.price}</span>
+                `;
+                packageContainer.appendChild(btn);
+            });
+
+            document.getElementById('card_form').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.onload = () => { selectCard('Razer Gold Pin'); };
+    </script>
+</head>
+<body class="bg-brandBg text-white min-h-screen font-sans">
+
+    {{template "navbar" .}}
+
+    <div class="max-w-6xl mx-auto p-6 space-y-10">
+
+        <div class="flex items-center space-x-3 border-b border-slate-800 pb-4">
+            <span class="text-3xl">💳</span>
+            <div>
+                <h1 class="text-2xl font-bold text-amber-400">สั่งซื้อบัตรเติมเกม / รหัสคูปอง (Gift Cards)</h1>
+                <p class="text-gray-400 text-sm">รับรหัสคูปองส่งเข้าเบอร์โทรศัพท์หรืออีเมลทันทีหลังชำระเงินสำเร็จ</p>
+            </div>
+        </div>
+
+        <!-- รายการบัตรเติมเงินทั้ง 7 แบรนด์ อิงรูปภาพตามไฟล์ Dart -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3">
+            <div onclick="selectCard('Razer Gold Pin')" class="cursor-pointer bg-brandCard border border-slate-800 hover:border-amber-400 p-4 rounded-2xl flex flex-col items-center justify-center transition transform hover:-translate-y-1">
+                <img src="/static/images/razer_gold.png" onerror="this.src='/static/images/garena.png'" class="h-12 object-contain mb-2">
+                <span class="text-xs font-bold text-white text-center">Razer Gold</span>
+            </div>
+            <div onclick="selectCard('Garena Shell')" class="cursor-pointer bg-brandCard border border-slate-800 hover:border-amber-400 p-4 rounded-2xl flex flex-col items-center justify-center transition transform hover:-translate-y-1">
+                <img src="/static/images/garena.png" class="h-12 object-contain mb-2">
+                <span class="text-xs font-bold text-white text-center">Garena Shell</span>
+            </div>
+            <div onclick="selectCard('Steam Wallet')" class="cursor-pointer bg-brandCard border border-slate-800 hover:border-amber-400 p-4 rounded-2xl flex flex-col items-center justify-center transition transform hover:-translate-y-1">
+                <img src="/static/images/steam.png" onerror="this.src='/static/images/garena.png'" class="h-12 object-contain mb-2">
+                <span class="text-xs font-bold text-white text-center">Steam Wallet</span>
+            </div>
+            <div onclick="selectCard('Roblox Card')" class="cursor-pointer bg-brandCard border border-slate-800 hover:border-amber-400 p-4 rounded-2xl flex flex-col items-center justify-center transition transform hover:-translate-y-1">
+                <img src="/static/images/roblox.png" onerror="this.src='/static/images/garena.png'" class="h-12 object-contain mb-2">
+                <span class="text-xs font-bold text-white text-center">Roblox Card</span>
+            </div>
+            <div onclick="selectCard('PlayStation Network')" class="cursor-pointer bg-brandCard border border-slate-800 hover:border-amber-400 p-4 rounded-2xl flex flex-col items-center justify-center transition transform hover:-translate-y-1">
+                <img src="/static/images/psn.png" onerror="this.src='/static/images/garena.png'" class="h-12 object-contain mb-2">
+                <span class="text-xs font-bold text-white text-center">PSN Card</span>
+            </div>
+            <div onclick="selectCard('Nintendo eShop')" class="cursor-pointer bg-brandCard border border-slate-800 hover:border-amber-400 p-4 rounded-2xl flex flex-col items-center justify-center transition transform hover:-translate-y-1">
+                <img src="/static/images/nintendo.png" onerror="this.src='/static/images/garena.png'" class="h-12 object-contain mb-2">
+                <span class="text-xs font-bold text-white text-center">Nintendo US</span>
+            </div>
+            <div onclick="selectCard('Xbox Gift Card')" class="cursor-pointer bg-brandCard border border-slate-800 hover:border-amber-400 p-4 rounded-2xl flex flex-col items-center justify-center transition transform hover:-translate-y-1">
+                <img src="/static/images/xbox.png" onerror="this.src='/static/images/garena.png'" class="h-12 object-contain mb-2">
+                <span class="text-xs font-bold text-white text-center">Xbox Card</span>
+            </div>
+        </div>
+
+        <!-- ฟอร์มสั่งซื้อบัตร -->
+        <div id="card_form" class="bg-brandCard border border-slate-800 p-6 rounded-2xl shadow-xl space-y-6">
+            <div>
+                <h2 class="text-xl font-bold text-amber-400 mb-1">⚡ ฟอร์มสั่งซื้อบัตรเติมเงิน</h2>
+                <p class="text-gray-400 text-sm">บัตรที่เลือก: <span id="display_card_name" class="text-amber-400 font-extrabold text-base">บัตร Razer Gold Pin</span></p>
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold uppercase text-gray-300 mb-3">1. เลือกราคาบัตรที่ต้องการ</label>
+                <div id="package_container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                </div>
+            </div>
+
+            <form action="/orders/create" method="POST" class="space-y-4">
+                <input type="hidden" name="game_name" id="selected_game" value="บัตร Razer Gold Pin">
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-gray-300 mb-2">2. เบอร์โทรศัพท์ หรือ อีเมลสำหรับรับโค้ดบัตร</label>
+                    <input type="text" name="player_id" placeholder="กรอกเบอร์โทรศัพท์ หรือ อีเมลของคุณ" required
+                        class="w-full bg-brandNav border border-slate-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-amber-400 transition">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-gray-300 mb-2">จำนวนเงินชำระ (บาท)</label>
+                    <input type="number" step="0.01" name="amount" id="amount_input" readonly required
+                        class="w-full bg-brandNav/50 border border-slate-800 rounded-xl px-4 py-3 text-amber-400 font-bold text-base focus:outline-none cursor-not-allowed">
+                </div>
+
+                <div class="bg-brandNav p-4 rounded-xl flex items-center justify-between border border-amber-400/30">
+                    <div>
+                        <span class="text-xs text-gray-400 block">ราคารวมทั้งสิ้น:</span>
+                        <span id="display_price" class="text-xl font-bold text-amber-400">฿0</span>
+                    </div>
+                    <button type="submit" class="bg-amber-400 text-brandBg font-bold px-8 py-3 rounded-xl hover:bg-amber-300 transition shadow-lg shadow-amber-400/20">
+                        ยืนยันการชำระเงิน
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>

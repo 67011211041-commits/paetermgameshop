@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เข้าสู่ระบบ - Paetermgame Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBg: '#1E1E2C',
+                        brandCard: '#252538',
+                        brandNav: '#161621',
+                        neonCyan: '#00FFC8',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brandBg text-white min-h-screen flex items-center justify-center p-4 font-sans">
+    <div class="w-full max-w-[380px] flex flex-col items-center">
+        <!-- Neon Icon Header -->
+        <div class="w-20 h-20 bg-brandCard rounded-full border-2 border-neonCyan flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(0,255,200,0.2)]">
+            <svg class="w-10 h-10 text-neonCyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457-.39-2.823-1.07-4" />
+            </svg>
+        </div>
+
+        <h1 class="text-2xl font-bold text-neonCyan mb-6">เข้าสู่ระบบ</h1>
+
+        <form action="/login" method="POST" class="w-full space-y-4">
+            <!-- Username Input -->
+            <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-neonCyan">
+                    👤
+                </span>
+                <input type="text" name="username" required placeholder="ชื่อผู้ใช้ หรือ อีเมล"
+                    class="w-full bg-brandCard text-white text-sm placeholder-gray-400 rounded-xl pl-10 pr-4 py-3.5 border border-transparent focus:outline-none focus:border-neonCyan transition">
+            </div>
+
+            <!-- Password Input -->
+            <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-neonCyan">
+                    🔒
+                </span>
+                <input type="password" name="password" required placeholder="รหัสผ่าน"
+                    class="w-full bg-brandCard text-white text-sm placeholder-gray-400 rounded-xl pl-10 pr-4 py-3.5 border border-transparent focus:outline-none focus:border-neonCyan transition">
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" 
+                class="w-full bg-neonCyan text-brandBg font-bold text-base py-3.5 rounded-xl hover:bg-[#00e6b4] transition shadow-lg shadow-neonCyan/20 active:scale-98 mt-2">
+                เข้าสู่ระบบ
+            </button>
+        </form>
+
+        <p class="text-gray-400 text-sm mt-6">
+            ยังไม่มีบัญชี? <a href="/register" class="text-neonCyan hover:underline font-semibold">สมัครสมาชิกที่นี่</a>
+        </p>
+    </div>
+</body>
+</html>

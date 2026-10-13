@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เติมเกม UID - Paetermgame Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBg: '#0F0F1A',
+                        brandCard: '#181826',
+                        brandNav: '#12121F',
+                        neonCyan: '#00FFC8',
+                    }
+                }
+            }
+        }
+
+        const gamePackages = {
+            'RoV': [
+                { name: '24 คูปอง', price: 24 },
+                { name: '60 คูปอง', price: 49 },
+                { name: '110 คูปอง', price: 89 },
+                { name: '370 คูปอง (Valorpass LV 1)', price: 295 },
+                { name: '620 คูปอง (Valorpass ขั้นสูง)', price: 485 },
+                { name: '1,100 คูปอง', price: 869 },
+                { name: 'Set จัดเต็ม 1,240 คูปอง', price: 970 },
+                { name: 'Set จัดเต็ม 4,960 คูปอง', price: 3880 }
+            ],
+            'Seven Knights': [
+                { name: '27 ปริซึม', price: 63 },
+                { name: '109 ปริซึม', price: 269 },
+                { name: '273 ปริซึม', price: 659 },
+                { name: '409 ปริซึม', price: 979 },
+                { name: '718 ปริซึม', price: 1589 },
+                { name: '990 ปริซึม', price: 2199 }
+            ],
+            'Valorant': [
+                { name: '475 VP', price: 125 },
+                { name: '1000 VP', price: 250 },
+                { name: '2050 VP', price: 500 },
+                { name: '3650 VP', price: 884 },
+                { name: '5350 VP', price: 1268 },
+                { name: '11000 VP', price: 2535 },
+                { name: '22000 VP', price: 5070 }
+            ],
+            'PUBG Mobile': [
+                { name: '60 UC', price: 34 },
+                { name: '325 UC', price: 155 },
+                { name: '660 UC', price: 305 },
+                { name: '1800 UC', price: 759 },
+                { name: '3850 UC', price: 1499 },
+                { name: '8100 UC', price: 2989 }
+            ],
+            'Arena Breakout': [
+                { name: '60 Bonds', price: 35 },
+                { name: '310 Bonds', price: 149 },
+                { name: '630 Bonds', price: 299 },
+                { name: '1280 Bonds', price: 599 },
+                { name: '3280 Bonds', price: 1490 }
+            ],
+            'Delta Force': [
+                { name: '18+1 Delta Coin', price: 12 },
+                { name: '30+2 Delta Coin', price: 19 },
+                { name: '60+3 Delta Coin', price: 34 },
+                { name: '300+36 Delta Coin', price: 170 },
+                { name: '680+105 Delta Coin', price: 340 }
+            ],
+            'eFootball': [
+                { name: '130 Coin', price: 39 },
+                { name: '300 Coin', price: 90 },
+                { name: '550 Coin', price: 150 },
+                { name: '1,040 Coin', price: 274 },
+                { name: '2,130 Coin', price: 538 }
+            ],
+            'FC Mobile': [
+                { name: '100 FC Points', price: 34 },
+                { name: '520 FC Points', price: 175 },
+                { name: '1070 FC Points', price: 335 },
+                { name: '2200 FC Points', price: 709 }
+            ],
+            'Free Fire': [
+                { name: '33 เพชร', price: 12 },
+                { name: '68 เพชร', price: 24 },
+                { name: '172 เพชร', price: 49 },
+                { name: '310 เพชร', price: 89 },
+                { name: '517 เพชร', price: 149 }
+            ],
+            'Genshin Impact': [
+                { name: 'พรแห่งดวงจันทร์ (Welkin)', price: 179 },
+                { name: '60 Genesis Crystals', price: 35 },
+                { name: '300+30 Genesis Crystals', price: 179 },
+                { name: '980+110 Genesis Crystals', price: 549 }
+            ],
+            'Honkai Star Rail': [
+                { name: '60 Oneiric Shard', price: 35 },
+                { name: '300+30 Oneiric Shard', price: 179 },
+                { name: '980+110 Oneiric Shard', price: 549 }
+            ],
+            'Wild Rift': [
+                { name: '425 Wild Cores', price: 144 },
+                { name: '1000 Wild Cores', price: 327 },
+                { name: '1850 Wild Cores', price: 576 }
+            ],
+            'Mobile Legends': [
+                { name: '86 Diamonds', price: 41 },
+                { name: '172 Diamonds', price: 82 },
+                { name: '257 Diamonds', price: 115 }
+            ]
+        };
+
+        function selectGame(gameName) {
+            document.getElementById('selected_game').value = gameName;
+            document.getElementById('display_game_name').innerText = gameName;
+            
+            const packageContainer = document.getElementById('package_container');
+            packageContainer.innerHTML = '';
+
+            const pkgs = gamePackages[gameName] || [
+                { name: 'แพ็กเกจเริ่มต้น', price: 50 },
+                { name: 'แพ็กเกจกลาง', price: 150 }
+            ];
+
+            pkgs.forEach(pkg => {
+                const btn = document.createElement('div');
+                btn.className = "cursor-pointer bg-brandNav border border-slate-700 hover:border-neonCyan p-3.5 rounded-xl flex flex-col justify-between transition group";
+                btn.onclick = () => selectPackage(pkg.name, pkg.price, btn);
+                btn.innerHTML = `
+                    <span class="text-xs font-semibold text-gray-300 group-hover:text-neonCyan">${pkg.name}</span>
+                    <span class="text-sm font-bold text-neonCyan mt-2">฿${pkg.price}</span>
+                `;
+                packageContainer.appendChild(btn);
+            });
+
+            document.getElementById('topup_form').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function selectPackage(name, price, element) {
+            document.querySelectorAll('#package_container > div').forEach(el => {
+                el.classList.remove('border-neonCyan', 'bg-slate-800');
+                el.classList.add('border-slate-700', 'bg-brandNav');
+            });
+            element.classList.remove('border-slate-700', 'bg-brandNav');
+            element.classList.add('border-neonCyan', 'bg-slate-800');
+
+            document.getElementById('amount_input').value = price;
+            document.getElementById('display_price').innerText = '฿' + price;
+        }
+
+        window.onload = () => { selectGame('RoV'); };
+    </script>
+</head>
+<body class="bg-brandBg text-white min-h-screen font-sans">
+
+    {{template "navbar" .}}
+
+    <div class="max-w-6xl mx-auto p-6 space-y-10">
+
+        <!-- Banner Header -->
+        <div class="bg-gradient-to-r from-cyan-950/40 via-brandCard to-brandCard p-8 rounded-2xl border border-neonCyan/20 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+                <h1 class="text-2xl md:text-3xl font-black text-white mb-2">บริการเติมเกมผ่าน UID อัตโนมัติ</h1>
+                <p class="text-gray-400 text-sm">สะดวก รวดเร็ว ปลอดภัย ได้รับไอเทมทันทีตลอด 24 ชั่วโมง</p>
+            </div>
+            <a href="/cards" class="bg-brandNav hover:bg-slate-800 border border-amber-400/40 text-xs text-amber-400 px-5 py-3 rounded-xl transition font-bold flex items-center space-x-2">
+                <span>💳</span>
+                <span>ซื้อบัตรเติมเงินคลิกที่นี่</span>
+            </a>
+        </div>
+
+        <!-- รายการเกม UID -->
+        <div>
+            <div class="flex items-center space-x-2 mb-4">
+                <span class="text-neonCyan text-xl">🎮</span>
+                <h2 class="text-lg font-bold text-white">เลือกเกมที่ต้องการเติม (UID / OpenID)</h2>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                <div onclick="selectGame('RoV')" class="cursor-pointer bg-brandCard border border-slate-800 hover:border-neonCyan p-4 rounded-xl flex flex-col items-center justify-center transition transform hover:-translate-y-1">
+                    <img src="/static/images/rov.png" class="h-12 object-contain mb-2">
+                    <span class="text-xs font-bold text-white">RoV</span>
+                </div>
+                <div onclick="selectGame('Seven Knights')" class="cursor-pointer bg-brandCard border border-slate-800 hover:border-neonCyan p-4 rounded-xl flex flex-col items-center justify-center transition transform hover:-translate-y-1">
+                    <img src="/static/images/svk.png" class="h-12 object-contain mb-2">
+                    <span class="text-xs font-bold text-white">Seven Knights</span>
+                </div>
+                <div onclick="selectGame('Valorant')" class="cursor-pointer bg-brandCard border border-slate-800 hover:border-neonCyan p-4 rounded-xl flex flex-col items-center justify-center transition transform hover:-translate-y-1">
+                    <img src="/static/images/vl.png" class="h-12 object-contain mb-2">
+                    <span class="text-xs font-bold text-white">Valorant</span>
+                </div>
+                <div onclick="selectGame('PUBG Mobile')" class="cursor-pointer bg-brandCard border border-slate-800 hover:border-neonCyan p-4 rounded-xl flex flex-col items-center justify-center transition transform hover:-translate-y-1">
+                    <img src="/static/images/pubg.png" class="h-12 object-contain mb-2">
+                    <span class="text-xs font-bold text-white">PUBG Mobile</span>
+                </div>
+                <div onclick="selectGame('Arena Breakout')" class="cursor-pointer bg-brandCard border border-slate-800 hover:border-neonCyan p-4 rounded-xl flex flex-col items-center justify-center transition transform hover:-translate-y-1">
+                    <img src="/static/images/arnbo.png" class="h-12 object-contain mb-2">
+                    <span class="text-xs font-bold text-white">Arena Breakout</span>
+                </div>
+                <div onclick="selectGame('Delta Force')" class="cursor-pointer bg-brandCard border border-slate-800 hover:border-neonCyan p-4 rounded-xl flex flex-col items-center justify-center transition transform hover:-translate-y-1">
+                    <img src="/static/images/df1.png" class="h-12 object-contain mb-2">
+                    <span class="text-xs font-bold text-white">Delta Force</span>
+                </div>
+                <div onclick="selectGame('eFootball')" class="cursor-pointer bg-brandCard border border-slate-800 hover:border-neonCyan p-4 rounded-xl flex flex-col items-center justify-center transition transform hover:-translate-y-1">
+                    <img src="/static/images/efb.png" class="h-12 object-contain mb-2">
+                    <span class="text-xs font-bold text-white">eFootball</span>
+                </div>
+                <div onclick="selectGame('FC Mobile')" class="cursor-pointer bg-brandCard border border-slate-800 hover:border-neonCyan p-4 rounded-xl flex flex-col items-center justify-center transition transform hover:-translate-y-1">
+                    <img src="/static/images/fcm.png" class="h-12 object-contain mb-2">
+                    <span class="text-xs font-bold text-white">FC Mobile</span>
+                </div>
+                <div onclick="selectGame('Free Fire')" class="cursor-pointer bg-brandCard border border-slate-800 hover:border-neonCyan p-4 rounded-xl flex flex-col items-center justify-center transition transform hover:-translate-y-1">
+                    <img src="/static/images/ff.png" class="h-12 object-contain mb-2">
+                    <span class="text-xs font-bold text-white">Free Fire</span>
+                </div>
+                <div onclick="selectGame('Genshin Impact')" class="cursor-pointer bg-brandCard border border-slate-800 hover:border-neonCyan p-4 rounded-xl flex flex-col items-center justify-center transition transform hover:-translate-y-1">
+                    <img src="/static/images/gi2.png" class="h-12 object-contain mb-2">
+                    <span class="text-xs font-bold text-white">Genshin Impact</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ฟอร์มสั่งเติมเกม -->
+        <div id="topup_form" class="bg-brandCard border border-slate-800 p-6 rounded-2xl shadow-xl space-y-6">
+            <div>
+                <h2 class="text-xl font-bold text-neonCyan mb-1">⚡ ฟอร์มสั่งทำรายการเติมเกม</h2>
+                <p class="text-gray-400 text-sm">เกมที่เลือก: <span id="display_game_name" class="text-neonCyan font-extrabold text-base">RoV</span></p>
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold uppercase text-gray-300 mb-3">1. เลือกแพ็กเกจที่ต้องการ</label>
+                <div id="package_container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                </div>
+            </div>
+
+            <form action="/orders/create" method="POST" class="space-y-4">
+                <input type="hidden" name="game_name" id="selected_game" value="RoV">
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-gray-300 mb-2">2. OpenID / UID / User ID / Konami ID หรือ Riot Tag</label>
+                    <input type="text" name="player_id" placeholder="กรอก UID / OpenID ของผู้เล่น" required
+                        class="w-full bg-brandNav border border-slate-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-neonCyan transition">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-gray-300 mb-2">จำนวนเงินชำระ (บาท)</label>
+                    <input type="number" step="0.01" name="amount" id="amount_input" readonly required
+                        class="w-full bg-brandNav/50 border border-slate-800 rounded-xl px-4 py-3 text-neonCyan font-bold text-base focus:outline-none cursor-not-allowed">
+                </div>
+
+                <div class="bg-brandNav p-4 rounded-xl flex items-center justify-between border border-neonCyan/30">
+                    <div>
+                        <span class="text-xs text-gray-400 block">ราคารวมทั้งสิ้น:</span>
+                        <span id="display_price" class="text-xl font-bold text-neonCyan">฿0</span>
+                    </div>
+                    <button type="submit" class="bg-neonCyan text-brandBg font-bold px-8 py-3 rounded-xl hover:bg-[#00e6b4] transition shadow-lg shadow-neonCyan/20">
+                        ยืนยันการชำระเงิน
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>

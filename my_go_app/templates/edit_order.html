@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แก้ไข UID - GameTopup Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 flex items-center justify-center min-h-screen">
+    <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl shadow-2xl w-full max-w-md">
+        <h2 class="text-xl font-bold text-indigo-400 mb-2">✏️ ฟอร์ม 2: แก้ไข UID ผู้เล่น</h2>
+        <p class="text-slate-400 text-sm mb-6">รายการ: <span class="text-slate-200 font-semibold">{{.GameName}}</span> ({{.Amount}} บาท)</p>
+        
+        <form action="/orders/edit/{{.ID}}" method="POST" class="space-y-5">
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-2">UID ผู้เล่นใหม่ (Player ID)</label>
+                <input type="text" name="player_id" value="{{.PlayerID}}" required
+                    class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2.5 text-slate-100 focus:outline-none focus:border-indigo-500">
+            </div>
+            <div class="flex space-x-3">
+                <button type="submit" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-lg transition">
+                    อัปเดตข้อมูล
+                </button>
+                <a href="/dashboard" class="flex-1 text-center bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-2.5 rounded-lg transition">
+                    ยกเลิก
+                </a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

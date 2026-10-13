@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Management - GameTopup Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans">
+
+    <!-- Navbar สีแดงสำหรับฝั่ง Admin -->
+    <nav class="bg-rose-950/40 border-b border-rose-900/40 backdrop-blur-md px-6 py-4 flex justify-between items-center sticky top-0 z-50">
+        <div class="flex items-center space-x-3">
+            <span class="text-2xl font-black tracking-wider text-rose-500">👑 ADMIN BACKOFFICE</span>
+            <span class="bg-rose-500/10 text-rose-400 border border-rose-500/30 text-xs px-2.5 py-1 rounded-full font-semibold">
+                Super Admin
+            </span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <a href="/dashboard" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold px-4 py-2 rounded-xl transition border border-slate-700">
+                ⬅️ ไปหน้า Dashboard ผู้ใช้
+            </a>
+            <a href="/logout" class="bg-rose-900/60 hover:bg-rose-800 text-rose-200 text-xs font-bold px-4 py-2 rounded-xl transition border border-rose-700/50">
+                ออกจากระบบ
+            </a>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto p-6 space-y-8">
+
+        <!-- สรุปสถิติหลังบ้าน (Stat Cards) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex items-center justify-between">
+                <div>
+                    <p class="text-slate-400 text-xs uppercase font-semibold">รายการสั่งซื้อทั้งหมดในระบบ</p>
+                    <h3 class="text-3xl font-black text-slate-100 mt-1">{{len .}} รายการ</h3>
+                </div>
+                <div class="p-3 bg-indigo-500/10 text-indigo-400 rounded-xl text-2xl">📦</div>
+            </div>
+
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex items-center justify-between">
+                <div>
+                    <p class="text-slate-400 text-xs uppercase font-semibold">สิทธิ์การใช้งาน</p>
+                    <h3 class="text-2xl font-bold text-rose-400 mt-1">Full Admin Access</h3>
+                </div>
+                <div class="p-3 bg-rose-500/10 text-rose-400 rounded-xl text-2xl">🛡️</div>
+            </div>
+
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex items-center justify-between">
+                <div>
+                    <p class="text-slate-400 text-xs uppercase font-semibold">สถานะฐานข้อมูล</p>
+                    <h3 class="text-2xl font-bold text-emerald-400 mt-1">PostgreSQL Active</h3>
+                </div>
+                <div class="p-3 bg-emerald-500/10 text-emerald-400 rounded-xl text-2xl">🟢</div>
+            </div>
+        </div>
+
+        <!-- ตารางจัดการออเดอร์ของลูกค้าทุกคน -->
+        <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl shadow-2xl">
+            <div class="mb-6">
+                <h2 class="text-xl font-bold text-slate-100">📋 ตารางจัดการรายการสั่งเติมเกม (ลูกค้าทุกคน)</h2>
+                <p class="text-slate-400 text-sm">แอดมินสามารถตรวจสอบ UID และเปลี่ยนสถานะรายการให้ลูกค้าได้ที่นี่</p>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-800 text-slate-400 text-xs font-semibold uppercase bg-slate-950/60">
+                            <th class="p-4">Order ID</th>
+                            <th class="p-4">ลูกค้า (Username)</th>
+                            <th class="p-4">ชื่อเกม / บัตร</th>
+                            <th class="p-4">UID / ข้อมูลติดต่อ</th>
+                            <th class="p-4">ยอดชำระ</th>
+                            <th class="p-4">สถานะปัจจุบัน</th>
+                            <th class="p-4 text-center">จัดการสถานะ (Admin Action)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800 text-sm">
+                        {{range .}}
+                        <tr class="hover:bg-slate-800/40 transition">
+                            <td class="p-4 font-mono text-slate-500">#{{.ID}}</td>
+                            <td class="p-4 font-bold text-rose-400">
+                                👤 {{.Username}}
+                            </td>
+                            <td class="p-4 font-bold text-indigo-300">{{.GameName}}</td>
+                            <td class="p-4">
+                                <span class="font-mono bg-slate-950 px-3 py-1 rounded-lg border border-slate-800 text-slate-200">
+                                    {{.PlayerID}}
+                                </span>
+                            </td>
+                            <td class="p-4 font-extrabold text-emerald-400">{{.Amount}} ฿</td>
+                            <td class="p-4">
+                                {{if eq .Status "Completed"}}
+                                    <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-full text-xs font-bold">
+                                        ✅ เติมสำเร็จ
+                                    </span>
+                                {{else if eq .Status "Cancelled"}}
+                                    <span class="bg-rose-500/10 text-rose-400 border border-rose-500/20 px-3 py-1 rounded-full text-xs font-bold">
+                                        ❌ ยกเลิกแล้ว
+                                    </span>
+                                {{else}}
+                                    <span class="bg-amber-500/10 text-amber-400 border border-amber-500/20 px-3 py-1 rounded-full text-xs font-bold">
+                                        ⏳ รอการเติมเงิน
+                                    </span>
+                                {{end}}
+                            </td>
+                            <td class="p-4 text-center">
+                                <form action="/admin/orders/status/{{.ID}}" method="POST" class="flex items-center justify-center gap-2">
+                                    <select name="status" class="bg-slate-950 border border-slate-700 text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-rose-500">
+                                        <option value="Pending" {{if eq .Status "Pending"}}selected{{end}}>⏳ Pending (รอดำเนินการ)</option>
+                                        <option value="Completed" {{if eq .Status "Completed"}}selected{{end}}>✅ Completed (เติมสำเร็จ)</option>
+                                        <option value="Cancelled" {{if eq .Status "Cancelled"}}selected{{end}}>❌ Cancelled (ยกเลิกรายการ)</option>
+                                    </select>
+                                    <button type="submit" class="bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition shadow-md shadow-rose-600/20">
+                                        บันทึก
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {{else}}
+                        <tr>
+                            <td colspan="7" class="p-8 text-center text-slate-500">ยังไม่มีรายการสั่งเติมเกมในระบบ</td>
+                        </tr>
+                        {{end}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

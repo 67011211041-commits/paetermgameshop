@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>นโยบายการคืนเงิน - Paetermgame Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBg: '#1E1E2C',
+                        brandCard: '#252538',
+                        brandNav: '#161621',
+                        neonCyan: '#00FFC8',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brandBg text-white min-h-screen font-sans">
+
+    {{template "navbar" .}}
+
+    <div class="max-w-4xl mx-auto p-6 my-8 space-y-6">
+        <div class="text-center">
+            <h1 class="text-2xl font-bold text-neonCyan mb-4">นโยบายการคืนสินค้าและคืนเงิน</h1>
+        </div>
+
+        <div class="bg-brandCard p-5 rounded-xl text-sm text-gray-200 leading-relaxed">
+            บริษัท แป๊ะเติมเกม ช็อป เอ็นเตอร์เทนเม้นท์ กรุ๊ป จำกัด (“บริษัทฯ”) ขอแจ้งนโยบายการคืนเงินเพื่อเป็นข้อตกลงและสร้างความเข้าใจเกี่ยวกับการใช้บริการเว็บไซต์ ดังนี้
+        </div>
+
+        <div class="bg-brandCard p-6 rounded-xl space-y-6 text-sm text-gray-300">
+            <div>
+                <h3 class="text-base font-bold text-neonCyan mb-2">1. เงื่อนไขสินค้าและการคืนเงิน</h3>
+                <ul class="list-disc list-inside space-y-1 pl-2 text-gray-300">
+                    <li>สินค้าที่ บริษัทฯ จัดจำหน่ายบนเว็บไซต์ เป็นสินค้าดิจิทัลที่ไม่สามารถคืนสินค้า และไม่สามารถคืนเงินได้</li>
+                    <li>บริษัทฯ จะทำการคืนเงินค่าสินค้าให้กับลูกค้า ในกรณีที่บริษัทฯ ไม่สามารถจัดส่งสินค้าให้ลูกค้าได้เท่านั้น (โดยจะทำการคืนเงินให้ในส่วนที่ บริษัทฯ ไม่ได้จัดส่งสินค้าให้ลูกค้า)</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-base font-bold text-neonCyan mb-2">2. ระยะเวลาการคืนเงินค่าสินค้า</h3>
+                <ul class="list-disc list-inside space-y-1.5 pl-2 text-gray-300">
+                    <li><b>บัตรเครดิต (ธนาคารพาณิชย์ในไทย):</b> ส่งเรื่องขอคืนเงินไปยังธนาคาร การคืนเงินขึ้นอยู่กับนโยบายของแต่ละธนาคาร โดยปกติผู้ถือบัตรจะได้รับเงินคืนในรอบบิลถัดไป</li>
+                    <li><b>True Money Wallet:</b> คืนเงินกลับไปยัง True Money Wallet ที่ใช้ชำระเงิน โดยใช้ระยะเวลาประมาณ 7-14 วันทำการ</li>
+                    <li><b>บัตรเดบิต (ธนาคารพาณิชย์ในไทย):</b> ส่งเรื่องขอคืนเงินไปยังธนาคาร ใช้ระยะเวลาคืนเงินตั้งแต่ 30-60 วัน นับจากวันที่ได้รับการแจ้งจาก Call Center</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-base font-bold text-neonCyan mb-2">3. กรณีที่ไม่สามารถยกเลิก หรือเปลี่ยนแปลงรายการสั่งซื้อได้</h3>
+                <ul class="list-disc list-inside space-y-1 pl-2 text-gray-300">
+                    <li>ความผิดพลาดในการสั่งซื้อสินค้า ผิดรุ่น, ผิดประเภทฯ</li>
+                    <li>การเปลี่ยนแปลงของราคาสินค้าที่อาจเกิดขึ้นได้ในอนาคต รวมถึง Gift Voucher ต่างๆ ทุกกรณี</li>
+                    <li>ต้องการใส่ส่วนลดเพิ่มเติม, ลืมใส่ส่วนลด หรือ Coupon</li>
+                    <li>การเปลี่ยนใจ (Change of mind) ของผู้สั่งซื้อสินค้าทุกกรณี</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-base font-bold text-neonCyan mb-2">4. กรณีที่ไม่ดำเนินการจัดส่ง และต้องคืนเงินเท่านั้น</h3>
+                <ul class="list-disc list-inside space-y-1 pl-2 text-gray-300">
+                    <li>สินค้าหมด (เช่น สินค้าหมด Stock, สินค้ายกเลิกการผลิตฯ)</li>
+                    <li>เกิดจากเหตุสุดวิสัย (System Error) ที่อาจเกิดขึ้น</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bg-brandNav border border-amber-500/40 p-4 rounded-xl text-xs text-amber-400 space-y-1">
+            <p class="font-bold">หมายเหตุ:</p>
+            <p>• บริษัทฯ ขอสงวนสิทธิ์ในการคืนเงินเกินระยะเวลาที่กำหนด หากเกิดเหตุสุดวิสัย</p>
+            <p>• บริษัทฯ ขอสงวนสิทธิ์ในการเปลี่ยนแปลงเงื่อนไขใดๆ โดยไม่จำเป็นต้องแจ้งให้ทราบล่วงหน้า</p>
+        </div>
+
+        <div>
+            <a href="/dashboard" class="inline-block bg-neonCyan text-brandBg font-bold text-xs px-5 py-2.5 rounded-lg hover:bg-[#00e6b4] transition">
+                ⬅️ กลับหน้าหลัก
+            </a>
+        </div>
+    </div>
+</body>
+</html>

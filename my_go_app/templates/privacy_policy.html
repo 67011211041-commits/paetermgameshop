@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>นโยบายความเป็นส่วนตัว - Paetermgame Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBg: '#1E1E2C',
+                        brandCard: '#252538',
+                        brandNav: '#161621',
+                        neonCyan: '#00FFC8',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brandBg text-white min-h-screen font-sans">
+
+    {{template "navbar" .}}
+
+    <div class="max-w-4xl mx-auto p-6 my-8 space-y-6">
+        <div class="text-center">
+            <h1 class="text-2xl font-bold text-neonCyan mb-4">นโยบายความเป็นส่วนตัว (Privacy Policy)</h1>
+        </div>
+
+        <div class="bg-brandCard p-5 rounded-xl text-sm text-gray-200 leading-relaxed">
+            บริษัท เคารพและให้ความสำคัญกับสิทธิความเป็นส่วนตัวและการคุ้มครองข้อมูลส่วนบุคคลของคุณ นโยบายความเป็นส่วนตัวนี้จัดทำขึ้นเพื่ออธิบายรายละเอียดเกี่ยวกับการเก็บรวบรวม ใช้ เปิดเผย และคุ้มครองข้อมูลส่วนบุคคลของคุณตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)
+        </div>
+
+        <div class="bg-brandCard p-6 rounded-xl space-y-6 text-sm text-gray-300">
+            <div>
+                <h3 class="text-base font-bold text-neonCyan mb-2">1. ข้อมูลส่วนบุคคลที่เราเก็บรวบรวม</h3>
+                <ul class="list-disc list-inside space-y-1 pl-2 text-gray-300">
+                    <li><b>ข้อมูลระบุตัวตนและข้อมูลติดต่อ:</b> ชื่อ-นามสกุล, ที่อยู่, เบอร์โทรศัพท์, อีเมล</li>
+                    <li><b>ข้อมูลการทำธุรกรรมและพฤติกรรม:</b> ประวัติการสั่งซื้อสินค้า, ประวัติการใช้งานเว็บไซต์หรือแอปพลิเคชัน, สินค้าที่สนใจ</li>
+                    <li><b>ข้อมูลทางเทคนิค:</b> ไอพีแอดเดรส, คุกกี้, ข้อมูลอุปกรณ์และเบราว์เซอร์ เพื่อให้เป็นไปตามข้อกำหนดทางกฎหมายและความปลอดภัยของระบบ</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-base font-bold text-neonCyan mb-2">2. วัตถุประสงค์ในการเก็บรวบรวม ใช้ หรือเปิดเผยข้อมูล</h3>
+                <ul class="list-disc list-inside space-y-1 pl-2 text-gray-300">
+                    <li><b>การให้บริการหลัก:</b> เพื่อดำเนินการตามคำสั่งซื้อ จัดส่งสินค้า ออกใบเสร็จ ยืนยันตัวตน และให้บริการหลังการขาย</li>
+                    <li><b>การพัฒนาและรักษาความปลอดภัย:</b> เพื่อบำรุงรักษา ปรับปรุงระบบ และป้องกันการทุจริตหรือการใช้งานที่ผิดกฎหมาย</li>
+                    <li><b>การตลาดและการวิเคราะห์ข้อมูล:</b> นำประวัติมาวิเคราะห์พฤติกรรม ทำการตลาดออนไลน์ ประชาสัมพันธ์โปรโมชัน ข่าวสาร และสิทธิพิเศษ (กรณีได้รับความยินยอม)</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-base font-bold text-neonCyan mb-2">3. การเปิดเผยข้อมูลส่วนบุคคลแก่บุคคลที่สาม</h3>
+                <ul class="list-disc list-inside space-y-1 pl-2 text-gray-300">
+                    <li>จะไม่ขาย เผยแพร่ หรือโอนข้อมูลให้บุคคลที่สาม เว้นแต่ได้รับความยินยอม หรือเป็นการปฏิบัติตามกฎหมาย/คำสั่งศาล</li>
+                    <li>อาจเปิดเผยแก่ผู้ให้บริการภายนอกที่ดำเนินการในนามของเรา เช่น ผู้ให้บริการระบบชำระเงิน หรือผู้ให้บริการระบบการตลาด</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-base font-bold text-neonCyan mb-2">4. ระยะเวลาในการเก็บรักษาข้อมูลส่วนบุคคล</h3>
+                <ul class="list-disc list-inside space-y-1 pl-2 text-gray-300">
+                    <li><b>ข้อมูลธุรกรรม/การสั่งซื้อ:</b> เก็บรักษาไว้ตามระยะเวลาที่กฎหมายกำหนด</li>
+                    <li><b>ข้อมูลทางการตลาด:</b> เก็บรักษาไว้เป็นระยะเวลา 5 ปี นับจากการสั่งซื้อ/ปฏิสัมพันธ์ครั้งสุดท้าย หรือจนกว่าจะแจ้งถอนความยินยอม</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-base font-bold text-neonCyan mb-2">5. มาตรฐานการรักษาความปลอดภัยของข้อมูล</h3>
+                <ul class="list-disc list-inside space-y-1 pl-2 text-gray-300">
+                    <li>ใช้เทคโนโลยีเข้ารหัสข้อมูลระดับ 256 บิต (มาตรฐานสากล)</li>
+                    <li>จัดให้มีมาตรการป้องกันเชิงเทคนิคและเชิงบริหารจัดการ เพื่อป้องกันการสูญหายหรือเปิดเผยข้อมูลโดยมิชอบ</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-base font-bold text-neonCyan mb-2">6. สิทธิของเจ้าของข้อมูลส่วนบุคคล (PDPA)</h3>
+                <p class="pl-2">สิทธิในการถอนความยินยอม, เข้าถึงและขอรับสำเนาข้อมูล, ขอแก้ไขข้อมูล, ขอลบ/ทำลายข้อมูล, ขอให้ระงับการใช้, คัดค้านการประมวลผล และขอโอนย้ายข้อมูล</p>
+            </div>
+        </div>
+
+        <div class="bg-brandNav border border-neonCyan/40 p-5 rounded-xl text-xs space-y-1">
+            <h4 class="font-bold text-neonCyan text-sm mb-1">ช่องทางการติดต่อเรื่องข้อมูลส่วนบุคคล</h4>
+            <p>LINE Official Account: <span class="text-white font-semibold">@samchashop</span></p>
+            <p>อีเมล: <span class="text-white font-semibold">samcha@gmail.com</span></p>
+            <p class="text-gray-400 italic pt-1">* เจ้าหน้าที่จำเป็นต้องขอให้แสดงหลักฐานเพื่อยืนยันตัวตนก่อนดำเนินการ</p>
+        </div>
+
+        <div>
+            <a href="/dashboard" class="inline-block bg-neonCyan text-brandBg font-bold text-xs px-5 py-2.5 rounded-lg hover:bg-[#00e6b4] transition">
+                ⬅️ กลับหน้าหลัก
+            </a>
+        </div>
+    </div>
+</body>
+</html>
